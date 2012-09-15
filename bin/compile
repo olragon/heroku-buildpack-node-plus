@@ -21,7 +21,7 @@ CACHE_DIR=$2
 # build casperjs and phantomjs#####################################
 # casperjs
 CASPER_FILENAME="casperjs-1.0.0-RC1.tar.gz"
-BUILDPACK_CASPERJS_PACKAGE="http://longkhoainc-binary.googlecode.com/files/${CASPER_FILENAME}"
+BUILDPACK_CASPERJS_PACKAGE="https://github.com/downloads/olragon/heroku-buildpack-nodejs/${CASPER_FILENAME}"
 if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
   echo "-----> Fetching CasperJS"
   curl -L $BUILDPACK_CASPERJS_PACKAGE -s -o $CACHE_DIR/$CASPER_FILENAME
