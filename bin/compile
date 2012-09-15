@@ -41,7 +41,7 @@ tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
 
 CASPER_VERSION="1.0.0-RC1"
 CASPER_FILENAME="casperjs-${CASPER_VERSION}.tar.gz"
-BUILDPACK_CASPERJS_PACKAGE="https://github.com/downloads/olragon/heroku-buildpack-casperjs/${CASPER_FILENAME}"
+BUILDPACK_CASPERJS_PACKAGE="http://longkhoainc-binary.googlecode.com/files/${CASPER_FILENAME}"
 if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
   echo "-----> Fetching CasperJS"
   echo "-----> Using command curl -L ${BUILDPACK_CASPERJS_PACKAGE} -s -o ${CACHE_DIR}/${CASPER_FILENAME}"
