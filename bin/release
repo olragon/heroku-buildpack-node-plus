@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
 
-cat <<EOF
+cat << EOF
 ---
 config_vars:
   PATH: "bin:node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/app/vendor/phantomjs/bin:/app/vendor/casperjs/bin"
   LD_LIBRARY_PATH: "/usr/local/lib:/usr/lib:/lib:/app/vendor/phantomjs/lib"
 default_process_types:
-  console: "vendor/phantomjs/bin/phantomjs"
+  web: bin/node app.js
 EOF
