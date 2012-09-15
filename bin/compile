@@ -10,10 +10,6 @@ set -x
 # clean up leaking environment
 unset GIT_DIR
 
-# config
-SCONS_VERSION="1.2.0"
-S3_BUCKET="heroku-buildpack-nodejs"
-
 # parse and derive params
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -52,6 +48,9 @@ tar zxf $CACHE_DIR/$CASPER_FILENAME -C $BUILD_DIR/vendor/casperjs
 
 ####################################################################
 
+# config
+SCONS_VERSION="1.2.0"
+S3_BUCKET="heroku-buildpack-nodejs"
 
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
