@@ -50,6 +50,7 @@ fi
 echo "-----> Extracting PhantomJS binaries" 
 mkdir -p $BUILD_DIR/vendor/phantomjs
 tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
+
 ####################################################################
 
 
