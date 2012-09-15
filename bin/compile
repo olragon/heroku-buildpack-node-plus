@@ -45,7 +45,7 @@ BUILDPACK_CASPERJS_PACKAGE="http://longkhoainc-binary.googlecode.com/files/${CAS
 if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
   echo "-----> Fetching CasperJS"
   echo "-----> Using command curl -L ${BUILDPACK_CASPERJS_PACKAGE} -s -o ${CACHE_DIR}/${CASPER_FILENAME}"
-  curl -L $BUILDPACK_CASPERJS_PACKAGE -s -o $CACHE_DIR/$CASPER_FILENAME
+  curl $BUILDPACK_CASPERJS_PACKAGE -s -o $CACHE_DIR/$CASPER_FILENAME
 fi
 
 echo "-----> Extracting CasperJS binaries"
