@@ -99,6 +99,42 @@ function package_download() {
   curl $package -s -o - | tar xzf - -C $location
 }
 
+# build casperjs and phantomjs#####################################
+# config
+VERSION="1.6.1"
+S3_BUCKET="stomita-buildpack-phantomjs"
+
+# s3 packages
+FILE_NAME="buildpack-phantomjs-${VERSION}.tar.gz"
+BUILDPACK_PHANTOMJS_PACKAGE="http://${S3_BUCKET}.s3.amazonaws.com/${FILE_NAME}"
+
+mkdir -p $CACHE_DIR
+if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
+  echo "-----> Fetching PhantomJS buildpack binaries"
+  curl $BUILDPACK_PHANTOMJS_PACKAGE -s -o $CACHE_DIR/$FILE_NAME
+fi
+
+echo "-----> Extracting PhantomJS binaries" 
+mkdir -p $BUILD_DIR/vendor/phantomjs
+tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
+
+# casperjs
+
+CASPER_VERSION="1.0.0-RC1"
+CASPER_FILENAME="caspjerjs-${CASPER_VERSION}.tar.gz"
+BUILDPACK_CASPERJS_PACKAGE="https://github.com/downloads/olragon/heroku-buildpack-casperjs/${CASPER_FILENAME}"
+if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
+  echo "-----> Fetching CasperJS"
+  curl -L $BUILDPACK_CASPERJS_PACKAGE -s -o $CACHE_DIR/$CASPER_FILENAME
+fi
+
+echo "-----> Extracting CasperJS binaries"
+mkdir -p $BUILD_DIR/vendor/casperjs
+tar zxf $CACHE_DIR/$CASPER_FILENAME -C $BUILD_DIR/vendor/casperjs
+
+####################################################################
+
+
 bootstrap_node=$(mktmpdir bootstrap_node)
 package_download "nodejs" "0.4.7" $bootstrap_node
 
@@ -175,4 +211,4 @@ echo "Dependencies installed" | indent
 
 echo "-----> Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
-echo "export PATH=\"\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\"" > $BUILD_DIR/.profile.d/nodejs.sh
+echo "export PATH=\"/app/vendor/phantomjs/bin:/app/vendor/casperjs/bin\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\"" > $BUILD_DIR/.profile.d/nodejs.sh
