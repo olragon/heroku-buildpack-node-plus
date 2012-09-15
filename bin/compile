@@ -5,7 +5,7 @@
 set -e
 
 # debug
-# set -x
+set -x
 
 # clean up leaking environment
 unset GIT_DIR
@@ -19,19 +19,6 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # build casperjs and phantomjs#####################################
-# casperjs
-CASPER_FILENAME="casperjs-1.0.0-RC1.tar.gz"
-BUILDPACK_CASPERJS_PACKAGE="https://github.com/downloads/olragon/heroku-buildpack-nodejs/${CASPER_FILENAME}"
-if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
-  echo "-----> Fetching CasperJS"
-  curl -L $BUILDPACK_CASPERJS_PACKAGE -s -o $CACHE_DIR/$CASPER_FILENAME
-fi
-
-echo "-----> Extracting CasperJS binaries"
-mkdir -p $BUILD_DIR/vendor/casperjs
-file $CACHE_DIR/$CASPER_FILENAME
-tar zxf $CACHE_DIR/$CASPER_FILENAME -C $BUILD_DIR/vendor/casperjs
-
 # config
 VERSION="1.6.1"
 S3_BUCKET="stomita-buildpack-phantomjs"
@@ -49,6 +36,19 @@ fi
 echo "-----> Extracting PhantomJS binaries" 
 mkdir -p $BUILD_DIR/vendor/phantomjs
 tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
+
+# casperjs
+CASPER_FILENAME="casperjs-1.0.0-RC1.tar.gz"
+BUILDPACK_CASPERJS_PACKAGE="https://github.com/downloads/olragon/heroku-buildpack-nodejs/${CASPER_FILENAME}"
+if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
+  echo "-----> Fetching CasperJS"
+  curl -L $BUILDPACK_CASPERJS_PACKAGE -s -o $CACHE_DIR/$CASPER_FILENAME
+fi
+
+echo "-----> Extracting CasperJS binaries"
+mkdir -p $BUILD_DIR/vendor/casperjs
+file $CACHE_DIR/$CASPER_FILENAME
+tar zxf $CACHE_DIR/$CASPER_FILENAME -C $BUILD_DIR/vendor/casperjs
 
 ####################################################################
 
