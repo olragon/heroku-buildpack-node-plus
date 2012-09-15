@@ -20,8 +20,7 @@ CACHE_DIR=$2
 
 # build casperjs and phantomjs#####################################
 # casperjs
-CASPER_VERSION="1.0.0-RC1"
-CASPER_FILENAME="casperjs-${CASPER_VERSION}.tar.gz"
+CASPER_FILENAME="casperjs-1.0.0-RC1.tar.gz"
 BUILDPACK_CASPERJS_PACKAGE="http://longkhoainc-binary.googlecode.com/files/${CASPER_FILENAME}"
 if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
   echo "-----> Fetching CasperJS"
