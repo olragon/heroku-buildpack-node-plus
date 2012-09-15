@@ -38,18 +38,17 @@ mkdir -p $BUILD_DIR/vendor/phantomjs
 tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
 
 # casperjs
-
 CASPER_VERSION="1.0.0-RC1"
 CASPER_FILENAME="casperjs-${CASPER_VERSION}.tar.gz"
 BUILDPACK_CASPERJS_PACKAGE="http://longkhoainc-binary.googlecode.com/files/${CASPER_FILENAME}"
 if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
   echo "-----> Fetching CasperJS"
-  echo "-----> Using command curl -L ${BUILDPACK_CASPERJS_PACKAGE} -s -o ${CACHE_DIR}/${CASPER_FILENAME}"
   curl $BUILDPACK_CASPERJS_PACKAGE -s -o $CACHE_DIR/$CASPER_FILENAME
 fi
 
 echo "-----> Extracting CasperJS binaries"
 mkdir -p $BUILD_DIR/vendor/casperjs
+file $CACHE_DIR/$CASPER_FILENAME
 tar zxf $CACHE_DIR/$CASPER_FILENAME -C $BUILD_DIR/vendor/casperjs
 
 ####################################################################
