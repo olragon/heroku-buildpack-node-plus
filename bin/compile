@@ -211,5 +211,5 @@ echo "Dependencies installed" | indent
 echo "-----> Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=\"\$HOME/bin:\$HOME/node_modules/.bin:\$PATH:/app/vendor/phantomjs/bin:/app/vendor/casperjs/bin\"" > $BUILD_DIR/.profile.d/nodejs.sh
-$BUILD_DIR/.profile.d/nodejs.sh
+export PATH="${HOME}/bin:${HOME}/node_modules/.bin:${PATH}:/app/vendor/phantomjs/bin:/app/vendor/casperjs/bin"
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/lib:/app/vendor/phantomjs/lib"
