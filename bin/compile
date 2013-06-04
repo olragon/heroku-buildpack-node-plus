@@ -16,12 +16,14 @@ CACHE_DIR=$2
 
 # build casperjs and phantomjs#####################################
 # config
-VERSION="1.6.1"
+VERSION="1.9.0"
 S3_BUCKET="stomita-buildpack-phantomjs"
+
+# https://ia801803.us.archive.org/1/items/BuildpackPhantomjs1.9.0.tar/buildpack-phantomjs-1.9.0.tar.gz
 
 # s3 packages
 FILE_NAME="buildpack-phantomjs-${VERSION}.tar.gz"
-BUILDPACK_PHANTOMJS_PACKAGE="http://${S3_BUCKET}.s3.amazonaws.com/${FILE_NAME}"
+BUILDPACK_PHANTOMJS_PACKAGE="https://ia801803.us.archive.org/1/items/BuildpackPhantomjs${VERSION}.tar/${FILE_NAME}"
 
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
@@ -29,13 +31,14 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   curl -L $BUILDPACK_PHANTOMJS_PACKAGE -s -o $CACHE_DIR/$FILE_NAME
 fi
 
-echo "-----> Extracting PhantomJS binaries" 
+echo "-----> Extracting PhantomJS binaries"
 mkdir -p $BUILD_DIR/vendor/phantomjs
 tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
 
 # casperjs
-CASPER_FILENAME="casperjs-1.0.0-RC1.tar.gz"
-BUILDPACK_CASPERJS_PACKAGE="https://github.com/downloads/olragon/heroku-buildpack-nodejs/${CASPER_FILENAME}"
+# https://ia801806.us.archive.org/17/items/Casperjs1.1DEV.tar/casperjs-1.1-DEV.tar.gz
+CASPER_FILENAME="casperjs-1.1-DEV.tar.gz"
+BUILDPACK_CASPERJS_PACKAGE="https://ia801806.us.archive.org/17/items/Casperjs1.1DEV.tar/${CASPER_FILENAME}"
 if ! [ -e $CACHE_DIR/$CASPER_FILENAME ]; then
   echo "-----> Fetching CasperJS"
   curl -L $BUILDPACK_CASPERJS_PACKAGE -s -o $CACHE_DIR/$CASPER_FILENAME
