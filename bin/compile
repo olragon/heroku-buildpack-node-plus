@@ -218,6 +218,6 @@ mkdir -p $BUILD_DIR/bin
 PATH="${HOME}/bin:${HOME}/node_modules/.bin:${PATH}:/app/vendor/phantomjs/bin:/app/vendor/casperjs/bin"
 LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/lib:/app/vendor/phantomjs/lib"
 ln -s /app/vendor/phantomjs/bin/phantomjs $BUILD_DIR/bin/phantomjs
-ln -s /app/vendor/casperjs/bin/casperjs $BUILD_DIR/bin/casperjs
+ln -s /app/vendor/casperjs/casperjs-1.1-DEV/bin/casperjs $BUILD_DIR/bin/casperjs
 
 
